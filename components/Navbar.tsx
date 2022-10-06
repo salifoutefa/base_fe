@@ -1,3 +1,9 @@
+import {
+  WalletConnectionStatus,
+  useWallet,
+  useWalletManager,
+} from "@josefleventon/cosmodal";
+import { useCallback, useState } from "react";
 import { ReactNode } from "react";
 import {
   Box,
@@ -21,6 +27,10 @@ import {
   useColorMode,
   useBreakpointValue,
   Image,
+  Stat,
+  StatLabel,
+  StatNumber,
+  StatHelpText,
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon, HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
@@ -44,6 +54,46 @@ const NavLink = ({ children }: { children: ReactNode }) => (
 export default function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  //-- Connect Wallet requirements
+  const { connect, disconnect } = useWalletManager();
+  const {
+    status: walletStatus,
+    error,
+    name,
+    address,
+    signingCosmWasmClient,
+  } = useWallet();
+
+  const [contractAddress, setContractAddress] = useState("");
+  const [msg, setMsg] = useState("");
+  const [status, setStatus] = useState("");
+
+  const execute = useCallback(async () => {
+    if (!address || !signingCosmWasmClient) return;
+
+    setStatus("Loading...");
+
+    try {
+      // Parse message.
+      const msgObject = JSON.parse(msg);
+
+      // Execute message.
+      const result = await signingCosmWasmClient.execute(
+        address,
+        contractAddress,
+        msgObject,
+        "auto"
+      );
+
+      console.log(result);
+      setStatus(`Executed. TX: ${result.transactionHash}`);
+    } catch (err) {
+      console.error(err);
+      setStatus(`Error: ${err instanceof Error ? err.message : `${err}`}`);
+    }
+  }, [address, contractAddress, msg, signingCosmWasmClient]);
+  //End Connect wallet requirements --
 
   return (
     <>
@@ -87,15 +137,35 @@ export default function Navbar() {
             </Stack>
 
             <HStack spacing="5" display={{ base: "none", md: "flex" }}>
-              <Button
-                variant={"solid"}
-                colorScheme={"teal"}
-                size={"sm"}
-                mr={4}
-                //onClick={launchKeplrWidget}
-              >
-                Connect Wallet
-              </Button>
+              {walletStatus !== WalletConnectionStatus.Connected ? (
+                <Stack direction={"row"} spacing="5" padding={5}>
+                  <IconButton
+                    variant="outline"
+                    colorScheme="teal"
+                    aria-label="Disconnect"
+                    onClick={disconnect}
+                  />
+                  <Stat>
+                    <StatLabel>Name: {name}</StatLabel>
+                    <StatNumber>£0.00</StatNumber>
+                  </Stat>
+                </Stack>
+              ) : (
+                <>
+                  <Button
+                    variant={"solid"}
+                    colorScheme={"teal"}
+                    size={"sm"}
+                    mr={4}
+                    onClick={connect}
+                  >
+                    Connect Wallet
+                  </Button>
+                  {error ? (
+                    <p>{error instanceof Error ? error.message : `${error}`}</p>
+                  ) : undefined}
+                </>
+              )}
             </HStack>
             <Menu>
               <MenuButton
