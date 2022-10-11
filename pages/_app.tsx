@@ -10,6 +10,8 @@ import { FunctionComponent } from "react";
 import { GasPrice } from "@cosmjs/stargate";
 
 import { ChakraProvider } from "@chakra-ui/react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const LOCAL_STORAGE_KEY = "connectedWalletId";
 
@@ -37,7 +39,9 @@ const MyApp: FunctionComponent<AppProps> = ({ Component, pageProps }) => (
         ),
       })}
     >
+      <Navbar></Navbar>
       <Component {...pageProps} />
+      <Footer></Footer>
     </WalletManagerProvider>
   </ChakraProvider>
 );

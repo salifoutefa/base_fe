@@ -32,7 +32,13 @@ import {
   StatNumber,
   StatHelpText,
 } from "@chakra-ui/react";
-import { MoonIcon, SunIcon, HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import {
+  MoonIcon,
+  SunIcon,
+  HamburgerIcon,
+  CloseIcon,
+  LockIcon,
+} from "@chakra-ui/icons";
 
 const Links = ["Launchpad", "Marketplace", "Stake", "Governance"];
 
@@ -98,7 +104,7 @@ export default function Navbar() {
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
-        <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
+        <Flex h={24} alignItems={"center"} justifyContent={"space-between"}>
           <IconButton
             size={"md"}
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
@@ -136,20 +142,27 @@ export default function Navbar() {
               </Button>
             </Stack>
 
-            <HStack spacing="5" display={{ base: "none", md: "flex" }}>
-              {walletStatus !== WalletConnectionStatus.Connected ? (
-                <Stack direction={"row"} spacing="5" padding={5}>
-                  <IconButton
-                    variant="outline"
-                    colorScheme="teal"
-                    aria-label="Disconnect"
-                    onClick={disconnect}
-                  />
-                  <Stat>
-                    <StatLabel>Name: {name}</StatLabel>
-                    <StatNumber>£0.00</StatNumber>
-                  </Stat>
-                </Stack>
+            <HStack
+              direction={"row"}
+              spacing="5"
+              display={{ base: "none", md: "flex" }}
+            >
+              {walletStatus === WalletConnectionStatus.Connected ? (
+                <HStack shadow={"dark-lg"} h={16}>
+                  <Stack direction={"row"} spacing="5" padding={5}>
+                    <Stat>
+                      <StatLabel>Name: {name}</StatLabel>
+                      <StatNumber fontSize={"-moz-initial"}>
+                        {address}
+                      </StatNumber>
+                    </Stat>
+                  </Stack>
+                  <Stack direction={"row"} spacing="5" padding={5}>
+                    <Link onClick={disconnect}>
+                      <LockIcon color={"orange"} />
+                    </Link>
+                  </Stack>
+                </HStack>
               ) : (
                 <>
                   <Button

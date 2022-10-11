@@ -1,17 +1,20 @@
+import { Box } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import Head from "next/head";
-import Navbar from "../components/Navbar";
 
-const Home: NextPage = () => {
+const Galery: NextPage = () => {
   return (
     <>
       <Head>
-        <title>MemeVerse DAO</title>
+        <title>MemeVerse DAO - Galery</title>
         <meta name="description" content="Description here" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Box>
+        <h1>Galery</h1>
+      </Box>
     </>
   );
 };
 
-export default Home;
+export default Galery;
