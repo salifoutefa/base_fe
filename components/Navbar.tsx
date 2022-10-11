@@ -40,7 +40,7 @@ import {
   LockIcon,
 } from "@chakra-ui/icons";
 
-const Links = ["Launchpad", "Marketplace", "Stake", "Governance"];
+const Links = ["Votes", "Auctions", "Gallery", "Backmarket"];
 
 const NavLink = ({ children }: { children: ReactNode }) => (
   <Link
@@ -51,7 +51,7 @@ const NavLink = ({ children }: { children: ReactNode }) => (
       textDecoration: "none",
       bg: useColorModeValue("gray.200", "gray.700"),
     }}
-    href={"#"}
+    href={"/" + children?.toString().toLowerCase()}
   >
     {children}
   </Link>

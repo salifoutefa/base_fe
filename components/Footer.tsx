@@ -7,7 +7,7 @@ import {
   useColorModeValue,
   VisuallyHidden,
 } from "@chakra-ui/react";
-import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
+import { FaDiscord, FaTelegram, FaTwitter } from "react-icons/fa";
 import React from "react";
 import { ReactNode } from "react";
 
@@ -58,16 +58,16 @@ const Footer = () => {
         justify={{ base: "center", md: "space-between" }}
         align={{ base: "center", md: "center" }}
       >
-        <Text>© 2022 Chakra Templates. All rights reserved</Text>
+        <Text>© 2022 MemeVerse. All rights reserved</Text>
         <Stack direction={"row"} spacing={6}>
           <SocialButton label={"Twitter"} href={"#"}>
             <FaTwitter />
           </SocialButton>
-          <SocialButton label={"YouTube"} href={"#"}>
-            <FaYoutube />
+          <SocialButton label={"Discord"} href={"#"}>
+            <FaDiscord />
           </SocialButton>
-          <SocialButton label={"Instagram"} href={"#"}>
-            <FaInstagram />
+          <SocialButton label={"Telegram"} href={"#"}>
+            <FaTelegram />
           </SocialButton>
         </Stack>
       </Container>

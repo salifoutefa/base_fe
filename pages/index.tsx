@@ -7,7 +7,7 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>MemeVerse DAO</title>
-        <meta name="description" content="Description here" />
+        <meta name="description" content="Shill Your Meme" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
     </>
