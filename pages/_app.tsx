@@ -16,10 +16,8 @@ import { UserContext } from "../Contexts/UserContext";
 
 const LOCAL_STORAGE_KEY = "connectedWalletId";
 
-const [user, setUser] = useState(null);
-
 const MyApp: FunctionComponent<AppProps> = ({ Component, pageProps }) => (
-  <UserContext.Provider value={{ user, setUser }}>
+  <UserContext.Provider value={null}>
     <ChakraProvider>
       <WalletManagerProvider
         walletConnectClientMeta={{

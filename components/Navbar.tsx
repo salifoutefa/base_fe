@@ -38,23 +38,32 @@ import {
   HamburgerIcon,
   CloseIcon,
   LockIcon,
+  ViewIcon,
+  CopyIcon,
 } from "@chakra-ui/icons";
+
+import NextLink from "next/link";
 
 const Links = ["Votes", "Auctions", "Gallery", "Backmarket"];
 
+function truncate(str: String, n: number) {
+  return str.length > n ? str.slice(0, n - 1) + "&hellip;" : str;
+}
+
 const NavLink = ({ children }: { children: ReactNode }) => (
-  <Link
-    px={6}
-    py={1}
-    rounded={"md"}
-    _hover={{
-      textDecoration: "none",
-      bg: useColorModeValue("gray.200", "gray.700"),
-    }}
-    href={"/" + children?.toString().toLowerCase()}
-  >
-    {children}
-  </Link>
+  <NextLink href={"/" + children?.toString().toLowerCase()} passHref>
+    <Link
+      px={6}
+      py={1}
+      rounded={"md"}
+      _hover={{
+        textDecoration: "none",
+        bg: useColorModeValue("gray.200", "gray.700"),
+      }}
+    >
+      {children}
+    </Link>
+  </NextLink>
 );
 
 export default function Navbar() {
@@ -113,12 +122,7 @@ export default function Navbar() {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={"center"}>
-            <Image
-              src={"/logo.png"}
-              h="80px"
-              fallbackSrc="https://via.placeholder.com/60"
-              alt="Logo"
-            />
+            <Image src={"/logo.png"} h="80px" alt="Logo" />
             <Text
               textAlign={useBreakpointValue({ base: "center", md: "left" })}
               fontSize="2xl"
@@ -146,7 +150,8 @@ export default function Navbar() {
               direction={"row"}
               spacing="5"
               display={{ base: "none", md: "flex" }}
-            >
+            ></HStack>
+            <HStack>
               {walletStatus === WalletConnectionStatus.Connected ? (
                 <HStack shadow={"dark-lg"} h={16}>
                   <Stack direction={"row"} spacing="5" padding={5}>
@@ -158,16 +163,24 @@ export default function Navbar() {
                     </Stat>
                   </Stack>
                   <Stack direction={"row"} spacing="5" padding={5}>
+                    <NextLink href={"/profile"} passHref>
+                      <Link>
+                        <ViewIcon color={"orange"} />
+                      </Link>
+                    </NextLink>
                     <Link onClick={disconnect}>
-                      <LockIcon color={"orange"} />
+                      <CopyIcon />
+                    </Link>
+                    <Link onClick={disconnect}>
+                      <LockIcon />
                     </Link>
                   </Stack>
                 </HStack>
               ) : (
-                <>
+                <Stack>
                   <Button
                     variant={"solid"}
-                    colorScheme={"teal"}
+                    colorScheme={"orange"}
                     size={"sm"}
                     mr={4}
                     onClick={connect}
@@ -177,31 +190,9 @@ export default function Navbar() {
                   {error ? (
                     <p>{error instanceof Error ? error.message : `${error}`}</p>
                   ) : undefined}
-                </>
+                </Stack>
               )}
             </HStack>
-            <Menu>
-              <MenuButton
-                as={Button}
-                rounded={"full"}
-                variant={"link"}
-                cursor={"pointer"}
-                minW={0}
-              >
-                <Avatar
-                  size={"sm"}
-                  src={
-                    "https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
-                  }
-                />
-              </MenuButton>
-              <MenuList>
-                <MenuItem>Link 1</MenuItem>
-                <MenuItem>Link 2</MenuItem>
-                <MenuDivider />
-                <MenuItem>Link 3</MenuItem>
-              </MenuList>
-            </Menu>
           </Flex>
         </Flex>
 

@@ -2,17 +2,19 @@ import { Box } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import Head from "next/head";
 
-const Auctions: NextPage = () => {
+const Profile: NextPage = () => {
   return (
     <>
       <Head>
-        <title>MemeVerse DAO - Auctions</title>
-        <meta name="description" content="Description here" />
+        <title>MemeVerse DAO - Profile</title>
+        <meta name="description" content="Shill Your Meme" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Box p={4}>Auctions page</Box>
+      <Box>
+        <h1>Profile</h1>
+      </Box>
     </>
   );
 };
 
-export default Auctions;
+export default Profile;

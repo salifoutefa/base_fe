@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import Head from "next/head";
 
-const Galery: NextPage = () => {
+const Gallery: NextPage = () => {
   return (
     <>
       <Head>
@@ -11,10 +11,10 @@ const Galery: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Box>
-        <h1>Galery</h1>
+        <h1>Gallery</h1>
       </Box>
     </>
   );
 };
 
-export default Galery;
+export default Gallery;
