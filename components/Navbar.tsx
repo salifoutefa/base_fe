@@ -31,6 +31,7 @@ import {
   StatLabel,
   StatNumber,
   StatHelpText,
+  Tooltip,
 } from "@chakra-ui/react";
 import {
   MoonIcon,
@@ -164,16 +165,22 @@ export default function Navbar() {
                   </Stack>
                   <Stack direction={"row"} spacing="5" padding={5}>
                     <NextLink href={"/profile"} passHref>
-                      <Link>
-                        <ViewIcon color={"orange"} />
-                      </Link>
+                      <Tooltip label="Profile">
+                        <Link>
+                          <ViewIcon color={"orange"} />
+                        </Link>
+                      </Tooltip>
                     </NextLink>
-                    <Link onClick={disconnect}>
-                      <CopyIcon />
-                    </Link>
-                    <Link onClick={disconnect}>
-                      <LockIcon />
-                    </Link>
+                    <Tooltip label="Copy Address">
+                      <Link onClick={disconnect}>
+                        <CopyIcon />
+                      </Link>
+                    </Tooltip>
+                    <Tooltip label="Disconnect">
+                      <Link onClick={disconnect}>
+                        <LockIcon />
+                      </Link>
+                    </Tooltip>
                   </Stack>
                 </HStack>
               ) : (

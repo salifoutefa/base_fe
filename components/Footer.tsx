@@ -2,10 +2,17 @@ import {
   Box,
   chakra,
   Container,
+  Divider,
+  Flex,
+  HStack,
+  Icon,
+  Image,
+  Link,
   Stack,
   Text,
   useColorModeValue,
   VisuallyHidden,
+  VStack,
 } from "@chakra-ui/react";
 import { FaDiscord, FaTelegram, FaTwitter } from "react-icons/fa";
 import React from "react";
@@ -45,33 +52,43 @@ const SocialButton = ({
 
 const Footer = () => {
   return (
-    <Box
-      bg={useColorModeValue("gray.50", "gray.900")}
-      color={useColorModeValue("gray.700", "gray.200")}
-    >
-      <Container
-        as={Stack}
-        maxW={"6xl"}
-        py={4}
-        direction={{ base: "column", md: "row" }}
-        spacing={4}
-        justify={{ base: "center", md: "space-between" }}
-        align={{ base: "center", md: "center" }}
-      >
-        <Text>© 2022 MemeVerse. All rights reserved</Text>
-        <Stack direction={"row"} spacing={6}>
-          <SocialButton label={"Twitter"} href={"#"}>
-            <FaTwitter />
-          </SocialButton>
-          <SocialButton label={"Discord"} href={"#"}>
-            <FaDiscord />
-          </SocialButton>
-          <SocialButton label={"Telegram"} href={"#"}>
-            <FaTelegram />
-          </SocialButton>
-        </Stack>
-      </Container>
-    </Box>
+    <>
+      <Box>
+        <Divider
+          w="95%"
+          mx="auto"
+          color="gray.600"
+          _dark={{
+            color: "#F9FAFB",
+          }}
+          h="3.5px"
+        />
+        <VStack py={3}>
+          <HStack justify="center">
+            <SocialButton label={"Twitter"} href={"#"}>
+              <FaTwitter />
+            </SocialButton>
+            <SocialButton label={"Discord"} href={"#"}>
+              <FaDiscord />
+            </SocialButton>
+            <SocialButton label={"Telegram"} href={"#"}>
+              <FaTelegram />
+            </SocialButton>
+          </HStack>
+
+          {/*<Text
+            textAlign="center"
+            fontSize="smaller"
+            _dark={{
+              color: "white",
+            }}
+          >
+            &copy;Copyright. All rights reserved.
+          </Text>*/}
+        </VStack>
+      </Box>
+      ;
+    </>
   );
 };
 
