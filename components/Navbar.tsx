@@ -158,19 +158,19 @@ export default function Navbar() {
                   <Stack direction={"row"} spacing="5" padding={5}>
                     <Stat>
                       <StatLabel>Name: {name}</StatLabel>
-                      <StatNumber fontSize={"-moz-initial"}>
+                      <StatNumber fontSize={"xx-small"}>
                         {address}
                       </StatNumber>
                     </Stat>
                   </Stack>
                   <Stack direction={"row"} spacing="5" padding={5}>
-                    <NextLink href={"/profile"} passHref>
+                    <Link href={"/profile"} >
                       <Tooltip label="Profile">
                         <Link>
                           <ViewIcon color={"orange"} />
                         </Link>
                       </Tooltip>
-                    </NextLink>
+                    </Link>
                     <Tooltip label="Copy Address">
                       <Link onClick={disconnect}>
                         <CopyIcon />

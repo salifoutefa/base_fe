@@ -1,6 +1,7 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Tooltip, Link } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import Head from "next/head";
+import NextLink from "next/link";
 
 const Profile: NextPage = () => {
   return (
@@ -12,6 +13,12 @@ const Profile: NextPage = () => {
       </Head>
       <Box>
         <h1>Profile</h1>
+      
+        <NextLink href={"/upload"}>
+          <Link>
+          Upload Meme
+          </Link>
+        </NextLink>
       </Box>
     </>
   );
