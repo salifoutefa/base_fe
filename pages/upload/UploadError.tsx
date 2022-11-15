@@ -1,9 +1,5 @@
-import {
-    createStyles,
-    LinearProgress,
-    Typography,
-    withStyles
-  } from '@material-ui/core';
+import { FormErrorMessage, Progress } from '@chakra-ui/react';
+
   import React from 'react';
   import { FileError } from 'react-dropzone';
   import { FileHeader } from './FileHeader';
@@ -14,22 +10,16 @@ import {
     errors: FileError[];
   }
   
-  const ErrorLinearProgress = withStyles((theme) =>
-    createStyles({
-      bar: {
-        backgroundColor: theme.palette.error.main,
-      },
-    })
-  )(LinearProgress);
+
   
   export function UploadError({ file, onDelete, errors }: UploadErrorProps) {
     return (
       <React.Fragment>
         <FileHeader file={file} onDelete={onDelete} />
-        <ErrorLinearProgress variant="determinate" value={100} />
+        <Progress size='md' value={100} />
         {errors.map((error) => (
           <div key={error.code}>
-            <Typography color="error">{error.message}</Typography>
+            <FormErrorMessage>{error.message}</FormErrorMessage>
           </div>
         ))}
       </React.Fragment>

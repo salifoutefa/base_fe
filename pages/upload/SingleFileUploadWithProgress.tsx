@@ -1,4 +1,4 @@
-import { Grid, LinearProgress } from '@material-ui/core';
+import { Grid, Progress } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { FileHeader } from './FileHeader';
 
@@ -25,9 +25,9 @@ export function SingleFileUploadWithProgress({
   }, []);
 
   return (
-    <Grid item>
+    <Grid >
       <FileHeader file={file} onDelete={onDelete} />
-      <LinearProgress variant="determinate" value={progress} />
+      <Progress size='md' value={progress}></Progress>
     </Grid>
   );
 }

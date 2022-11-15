@@ -1,4 +1,4 @@
-import { Grid, makeStyles } from '@material-ui/core';
+import { Grid } from '@chakra-ui/react';
 import { useField } from 'formik';
 import React, { useCallback, useEffect, useState } from 'react';
 import { FileError, FileRejection, useDropzone } from 'react-dropzone';
@@ -22,22 +22,10 @@ export interface UploadableFile {
   url?: string;
 }
 
-const useStyles = makeStyles((theme) => ({
-  dropzone: {
-    border: `2px dashed ${theme.palette.primary.main}`,
-    borderRadius: theme.shape.borderRadius,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    background: theme.palette.background.default,
-    height: theme.spacing(10),
-    outline: 'none',
-  },
-}));
 
 export function MultipleFileUploadField({ name }: { name: string }) {
   const [_, __, helpers] = useField(name);
-  const classes = useStyles();
+  //const classes = useStyles();
 
   const [files, setFiles] = useState<UploadableFile[]>([]);
   const onDrop = useCallback((accFiles: File[], rejFiles: FileRejection[]) => {
@@ -68,14 +56,16 @@ export function MultipleFileUploadField({ name }: { name: string }) {
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    accept: ['image/*', 'video/*', '.pdf'],
-    maxSize: 300 * 1024, // 300KB
+    accept: {
+      'image/png': ['.png', '.jpg', '.jpeg']
+    },
+    maxSize: 10000 * 1024, // 10 MB
   });
 
   return (
     <React.Fragment>
-      <Grid item>
-        <div {...getRootProps({ className: classes.dropzone })}>
+      <Grid>
+        <div {...getRootProps({})}>
           <input {...getInputProps()} />
 
           <p>Drag 'n' drop some files here, or click to select files</p>
@@ -83,7 +73,7 @@ export function MultipleFileUploadField({ name }: { name: string }) {
       </Grid>
 
       {files.map((fileWrapper) => (
-        <Grid item key={fileWrapper.id}>
+        <Grid key={fileWrapper.id}>
           {fileWrapper.errors.length ? (
             <UploadError
               file={fileWrapper.file}
